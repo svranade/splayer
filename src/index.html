@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SPlayer</title>
+</head>
+<style>
+    .video{
+        width: 600px;
+        margin: 50px auto;
+    }
+</style>
+<body>
+
+
+<div class="video">
+    <div id="splayer"></div>
+</div>
+
+
+
+<script src="./script/splayer.ts"></script>
+<script>
+    let video = new SPlayer({
+        el: '#splayer',
+        src: 'http://oycxw1578.bkt.clouddn.com/test2.mp4',
+        poster: 'http://oycxw1578.bkt.clouddn.com/test.jpg'
+    })
+</script>
+</body>
+</html>

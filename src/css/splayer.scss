@@ -1,0 +1,266 @@
+
+
+$themeColor: rgb(3,169,244);
+
+.splayer{
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+
+    &:-webkit-full-screen {
+        display: flex;
+        height: 100%;
+        background: black;
+    }
+
+    *{
+        box-sizing: border-box;
+        user-select: none;
+    }
+
+    video{
+        width: 100%;
+        display: block;
+    }
+ 
+    // 控制条
+    .splayer_controls{
+        position: absolute;
+        width: 100%;
+        bottom: 0;
+        z-index: 1;
+        padding: 12px 12px 0;
+        transition: all .2s ease;
+        background: linear-gradient(to bottom, transparent 20%,rgba(0,0,0,.3));
+        &.splayer_controls_hide{
+            opacity: 0;
+            transform: translate3d(0,50%,0);
+        }
+    }
+
+    // 进度条
+    .splayer_speed{
+        width: 100%;
+        height: 4px;
+        background-color: rgba(255,255,255,.6);
+        position: relative;
+        transition: height .1s linear;
+        cursor: pointer;
+
+        // 放大并显示进度点标志
+        &:hover{
+            height: 8px;
+            .splayer_show_speed{
+                pointer-events: none;
+                &::after{
+                    content: '';
+                    position: absolute;
+                    right: -6px;
+                    top: -2px;
+                    width: 12px;
+                    height: 12px;
+                    border-radius: 50%;
+                    background: $themeColor;
+                    box-shadow: 0 0 10px rgba(0,0,0,.3);
+                }
+            }
+            .splayer_preview{
+                display: block;
+            }
+        }
+    }
+
+    // 显示的进度
+    .splayer_show_speed{
+        height: 100%;
+        width: 0;
+        position: relative;
+        background: $themeColor;
+        transition: width .2s linear;
+    }
+
+     // 显示的预览图 和 时间
+    .splayer_preview{
+        width: 200px;
+        background-color: black;
+        position: absolute;
+        bottom: 18px;
+        display: none;
+        img{
+            width: 100%;
+            display: block;
+        }
+        span{
+            position: absolute;
+            left: 6px;
+            bottom: 6px;
+            color: #fff;
+            font-size: 14px;
+            text-shadow: 0 0 10px black;
+        }
+    }
+
+
+    // 控制按钮
+    .splayer_group{
+        height: 46px;
+        padding: 11px 0;
+        display: flex;
+    }
+
+    // svg按钮
+    .splayer_button{
+        width: 24px;
+        height: 24px;
+        cursor: pointer;
+        margin-right: 16px;
+        path{
+            stroke-width: 0;
+            fill: #fff;
+            transition: d 0.2s ease-in-out;
+        }
+    }
+
+    // 鼠标经过音量按钮 显示音量控制
+    .splayer_volume{
+        width: auto;
+        height: 24px;
+        display: flex;
+        align-items: center;
+        &:hover{
+            .splayer_volume_bac{
+                width: 100px;
+                margin-right: 16px;
+                margin-left: -6px;
+            }
+            .splayer_volume_speed{
+                &::after{
+                    display: block;
+                }
+            }
+        }
+    }
+
+    // 音量控制
+    .splayer_volume_bac{
+        width: 0;
+        height: 4px;
+        background: rgba(255,255,255,.3);
+        transition: width .1s ease;
+    }
+
+    // 音量进度
+    .splayer_volume_speed{
+        height: 100%;
+        width: 100%;
+        background: $themeColor;
+        position: relative;
+        transition: width .1s ease;
+        &::after{
+            content: '';
+            position: absolute;
+            right: -5px;
+            top: -3px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: $themeColor;
+            box-shadow: 0 0 10px rgba(0,0,0,.3);
+            display: none;
+        }
+    }
+    
+    // 时间
+    .splayer_time{
+        display: block;
+        height: 24px;
+        line-height: 24px;
+        color: #fff;
+        font-size: 16px;
+        margin-right: 16px;
+    }
+    
+    // 全屏按钮
+    .splayer_full{
+        margin-left: auto;
+        margin-right: 0;
+    }
+
+    // 蒙层
+    .splayer_layer{
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    // 加载中
+    .splayer_loading{
+        width: auto;
+        display: none;
+        .splayer_loading_i{
+            display: block;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            &:first-child{
+                background-color: #e23030;
+                animation: loading_left 1s infinite linear;
+                @keyframes loading_left {
+                    0%,100%{
+                        transform: translate3d(-16px,0,0);
+                    }
+                    50%{
+                        transform: translate3d(32px,0,0);
+                    }
+                }
+            }
+            &:last-child{
+                background-color: $themeColor;
+                animation: loading_right 1s infinite linear;
+                @keyframes loading_right {
+                    0%,100%{
+                        transform: translate3d(16px,0,0);
+                    }
+                    50%{
+                        transform: translate3d(-32px,0,0);
+                    }
+                }
+            }
+        }
+    }
+
+    // 点击了播放
+    .splayer_layer_play{
+        padding: 20px;
+        border-radius: 50%;
+        background-color: rgba(0,0,0,.4);
+        display: none;
+        animation: layerPlay .5s;
+        @keyframes layerPlay {
+            from{
+                transform: scale(0,0);
+                opacity: 1;
+            }
+            to{
+                transform: scale(1,1);
+                opacity: 0;
+            }
+        }
+        svg{
+            width: 60px;
+            height: 60px;
+            path{
+                stroke-width: 0;
+                fill: #fff;
+            }
+        }
+    }
+
+
+}
+

@@ -1,0 +1,33 @@
+{
+  "name": "splayer",
+  "description": "Simple and beautiful HTML5 video player",
+  "version": "0.0.1",
+  "main": "./dist/splayer.js",
+  "style": "./dist/splayer.css",
+  "scripts": {
+    "dev": "parcel ./src/index.html",
+    "build": "rm -rf ./dist && parcel build ./src/script/splayer.ts"
+  },
+  "devDependencies": {
+    "parcel-bundler": "^1.4.1",
+    "node-sass": "^4.7.2",
+    "typescript": "^2.6.2"
+  },
+  "keywords": [
+    "player",
+    "splayer",
+    "video",
+    "html5",
+    "html5-player",
+    "html5-video-player"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wyhaya/splayer.git"
+  },
+  "bugs": {
+    "url": "https://github.com/wyhaya/splayer/issues"
+  },
+  "author": "wyhaya <wyhaya@gmail.com>",
+  "license": "MIT"
+}
