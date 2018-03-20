@@ -6,8 +6,6 @@
 
 SPlayer is a HTML5 player, using typescript development, only need to initialize an instance can use, at the same time we provide some simple API for you to use.
 
-[View Demo](http://xxx.xxx)
-
 ## Install
 
 ```bash
